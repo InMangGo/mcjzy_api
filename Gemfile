@@ -20,7 +20,7 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # https://github.com/cerebris/jsonapi-resources
 # api返回值json格式化
-gem 'jsonapi-resources'
+# gem 'jsonapi-resources'
 # https://github.com/elabs/pundit
 # 权限管理
 gem 'pundit'
