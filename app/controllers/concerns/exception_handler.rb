@@ -3,14 +3,15 @@ module ExceptionHandler
   extend ActiveSupport::Concern
 
   included do
-    rescue_from ActionController::RoutingError ->(error) { error_render(error, 500) }
-    rescue_from AbstractController::ActionNotFound ->(error) { error_render(error, 404) }
-    rescue_from ActiveRecord::RecordNotFound ->(error) { error_render(error, 404) }
+    rescue_from ActiveRecord::RecordNotFound,         with: :error_render
+    rescue_from ActionController::RoutingError,       with: :error_render
+    rescue_from ActionController::UnknownController,  with: :error_render
+    rescue_from AbstractController::ActionNotFound,   with: :error_render
   end
 
   private
 
-  def error_render(error, code)
-    render_json(msg: error, status: code)
+  def error_render(error)
+    render_json(msg: error, status: 404)
   end
 end
